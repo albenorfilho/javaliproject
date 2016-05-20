@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listar Contatos</title>
+<title>Listar Disciplinas</title>
 </head>
 <body>
-	<h2>Novo Contato</h2><br>
+	<h2>Nova disciplina</h2><br>
 	
 	<form:form id="adicionarDisciplinaForm" commandName="disciplina" servletRelativeAction="/adicionar" method="POST">
 		<label>Nome: </label>
