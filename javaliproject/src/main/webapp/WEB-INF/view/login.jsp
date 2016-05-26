@@ -38,15 +38,43 @@
 						    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 						    <input type="password" name="j_password" id="key" class="form-control" placeholder="senha">
 						</div>
+												
 					</div>
+						    <div class="form-group">
+							  <input type="radio" name="type" value="1">Professor
+							  <input type="radio" name="type" value="0">Aluno<br>
+							  
+							</div>
+						
 					
 
 					<div style="text-align: center;">
 						<button class="btn btn-siaf btn-login hvr-icon-forward" name="submit" type="submit" value="Login" value="Login">Login</button>
 					</div>
+					
+
+					
+					
+					
 				</form:form>
 		</div>
 	</div>
+
+
+
+
+<h2>OUTRO LOGIN</h2><br>
+	
+	<form:form id="loginForm" commandName="professor" servletRelativeAction="/login" method="POST">
+		<label>SIAPE: </label>
+		<form:input type="text" path="siape"/><br>
+		
+		
+		<input type="submit" value="login"/>
+	</form:form>
+
+
+
 
 </body>
 </html>

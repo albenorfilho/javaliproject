@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listar Professores</title>
+<title>Listar Alunos</title>
 </head>
 <body>
-	<h2>Novo Professor</h2><br>
+	<h2>Novo Aluno</h2><br>
 	
-	<form:form id="adicionarProfessorForm" commandName="professor" servletRelativeAction="/professor/adicionar" method="POST">
+	<form:form id="adicionarAlunoForm" commandName="aluno" servletRelativeAction="/aluno/adicionar" method="POST">
 		<label>Nome: </label>
 		<form:input type="text" path="nome"/><br>
 		<label>Username: </label>
 		<form:input type="text" path="username"/><br>
 		<label>Senha: </label>
 		<form:input type="password" path="senha"/><br>
-		<label>SIAPE: </label>
-		<form:input type="text" path="siape"/><br>
+		<label>Matricula: </label>
+		<form:input type="text" path="matricula"/><br>
 		
 		
 		

@@ -40,7 +40,15 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 	public Professor findById(Long id) {
 		return em.find(Professor.class, id);
 	}
-
+	
+	@Override
+	public Professor findBySiape(String siape) {
+		Query q = em.createQuery("FROM professor WHERE siape=:siape");
+		q.setParameter("siape", siape);
+		return (Professor) q.getSingleResult();
+	}
+	
+	
 	@Override
 	@Transactional
 	public void remover(Professor professor) {

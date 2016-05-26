@@ -15,6 +15,8 @@ public interface ProfessorRepository {
 	
 	Professor findById(Long id);
 	
+	Professor findBySiape(String siape);
+	
 	void remover(Professor professor);
 
 }

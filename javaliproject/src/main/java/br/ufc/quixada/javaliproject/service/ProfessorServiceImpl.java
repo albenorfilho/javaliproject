@@ -33,5 +33,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		Professor professor = professorRepository.findById(id);
 		professorRepository.remover(professor);
 	}
+	
+	@Override
+	public Professor getProfessor(String siape){
+		return professorRepository.findBySiape(siape);
+	}
 
 }

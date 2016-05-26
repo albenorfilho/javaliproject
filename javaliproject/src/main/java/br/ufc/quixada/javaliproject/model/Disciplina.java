@@ -1,11 +1,14 @@
 package br.ufc.quixada.javaliproject.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity(name="disciplina")
@@ -19,7 +22,20 @@ public class Disciplina {
 	@ManyToOne
 	@JoinColumn(name = "professor") 
 	private Professor professor;
+	@ManyToMany(mappedBy="disciplinas")
+	private List<Aluno> alunos;
+
 	
+	
+	
+	
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
 
 	public Professor getProfessor() {
 		return professor;

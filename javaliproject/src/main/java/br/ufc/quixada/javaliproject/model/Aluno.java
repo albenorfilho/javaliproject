@@ -9,27 +9,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-@Entity(name="professor")
-@DiscriminatorValue(value = "P")
-public class Professor extends Usuario{
+@Entity(name="aluno")
+@DiscriminatorValue(value = "A")
+public class Aluno extends Usuario{
 	
 	
 	@Column
-	private String siape;
-	@OneToMany(mappedBy="professor", cascade=CascadeType.ALL)
-	private List<Disciplina> disciplinas;
+	private String matricula;
+	 @ManyToMany
+     @JoinTable(name="aluno_tem_disciplinas", joinColumns={@JoinColumn(name="aluno_id")}, inverseJoinColumns={@JoinColumn(name="disciplina_id")})
+	 private List<Disciplina> disciplinas;
 	
 	
 	
 	
 	
-	public String getSiape() {
-		return siape;
+	public String getMatricula() {
+		return matricula;
 	}
-	public void setSiape(String siape) {
-		this.siape = siape;
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
