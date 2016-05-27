@@ -16,62 +16,25 @@
 			<div class="login-text">
 				<span id="title">Login</span>
 			</div>
-				<form:form role="form" servletRelativeAction="/j_spring_security_check"  method="post" id="login-form" autocomplete="off" class="form-horizontal">
 	
-					<c:if test="${not empty erro}">
-						<div class="login-error"><i class="fa fa-times-circle-o"></i> ${erro}</div>
-					</c:if>
-		
-					<c:if test="${not empty msg}">
-						<div class="msg"> <i class="fa fa-info-circle"></i>${msg}</div>
-					</c:if>
 				
 					<div class="form-group">
 						<div id="inputLogin" class="form-inline input-group input-login">
 						    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input type="text" name="j_username" id="login" class="form-control" placeholder="login">
+							<form:form id="loginForm" commandName="usuario" servletRelativeAction="/login" method="POST">
+								<label>Username: </label>
+								<form:input type="text" path="username"/><br>
+								
+								
+								<input type="submit" value="login"/>
+							</form:form>
 						</div>
 					</div>
-										
-					<div class="form-group">
-						<div id="inputSenha" class="form-inline input-group input-login">
-						    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						    <input type="password" name="j_password" id="key" class="form-control" placeholder="senha">
-						</div>
-												
-					</div>
-						    <div class="form-group">
-							  <input type="radio" name="type" value="1">Professor
-							  <input type="radio" name="type" value="0">Aluno<br>
-							  
-							</div>
-						
-					
 
-					<div style="text-align: center;">
-						<button class="btn btn-siaf btn-login hvr-icon-forward" name="submit" type="submit" value="Login" value="Login">Login</button>
-					</div>
-					
-
-					
-					
-					
-				</form:form>
 		</div>
 	</div>
 
 
-
-
-<h2>OUTRO LOGIN</h2><br>
-	
-	<form:form id="loginForm" commandName="professor" servletRelativeAction="/login" method="POST">
-		<label>SIAPE: </label>
-		<form:input type="text" path="siape"/><br>
-		
-		
-		<input type="submit" value="login"/>
-	</form:form>
 
 
 

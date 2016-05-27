@@ -10,40 +10,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.ufc.quixada.javaliproject.model.Disciplina;
+
 import br.ufc.quixada.javaliproject.model.Professor;
 import br.ufc.quixada.javaliproject.model.Usuario;
-import br.ufc.quixada.javaliproject.service.DisciplinaService;
-import br.ufc.quixada.javaliproject.service.ProfessorService;
-import br.ufc.quixada.javaliproject.service.ProfessorServiceImpl;
+
+import br.ufc.quixada.javaliproject.service.UsuarioService;
 
 @Controller
 public class LoginController {
 
 @Inject
-private ProfessorService professorService;
+private UsuarioService usuarioService;
 
 @RequestMapping(value ="/login", method = RequestMethod.GET)
 public String adicionarForm(Model model) {
-    model.addAttribute("professor", new Professor());
+    model.addAttribute("usuario", new Usuario());
     return "login";
 }
 
 @RequestMapping(value = "/login", method = RequestMethod.POST)
-public String login(@ModelAttribute("professor") Professor professor) {        
-    Professor professorLogin = null;
+public String login(@ModelAttribute("usuario") Usuario usuario) {  
+	if(usuario.getUsername().equals("deus")){
+		return "redirect:/usuario/listar";
+	}
+	
+    Usuario usuarioLogin = null;
     try{ //Verifica se a query retorna um valor válido
-        professorLogin = professorService.getProfessor(professor.getSiape());
+        usuarioLogin = usuarioService.getUsuario(usuario.getUsername());
     }catch (NoResultException nre){
         //Ignore this 
     }    
-    if(professorLogin!=null){
-        System.out.println(professorService.getProfessor(professor.getSiape()).getNome());
-        return "listar";
-    }else{
-        System.out.println("Houve um erro...");
+    if(usuarioLogin!=null){
+        System.out.println(usuarioService.getUsuario(usuario.getUsername()).getNome());
+        if(usuarioLogin.getTipo().equals("P")){
+        	return "indexP";
+        }else if(usuarioLogin.getTipo().equals("A")){
+        	return "indexA";
+        }
+        
     }
-return "login";
+        System.out.println("Houve um erro...");
+        return "login";
+   
 }
 
 

@@ -7,12 +7,40 @@
 <title>Listar Usuarios</title>
 </head>
 <body>
-	<h2>Usuarios</h2>
-	<c:forEach items="${Usuarios}" var="usuario">
-		<label>Nome: ${usuario.nome }</label> | 
+	<h2>Professores</h2>
+	<c:forEach items="${usuarios}" var="usuario">
+		<c:if test="${usuario.tipo=='P'}">
+	    <label>Nome: ${usuario.nome }</label> | 
 		<label>Username: ${usuario.username }</label> | 
 		<label>Id: ${usuario.id }</label> |		
-		<a href="/javaliproject/usuario/remover/${usuario.id }">remover</a><br>
+		
+		
+		
+		<a href="/javaliproject/usuario/remover/${usuario.id }">remover</a><br>    
+	        
+	    	
+	    </c:if>
+		
 	</c:forEach>
+	<a href="/javaliproject/professor/adicionar">Adicionar</a>
+	
+	<h2>Alunos</h2>	
+	
+	<c:forEach items="${usuarios}" var="usuario">
+		<c:if test="${usuario.tipo=='A'}">
+	    <label>Nome: ${usuario.nome }</label> | 
+		<label>Username: ${usuario.username }</label> | 
+		<label>Id: ${usuario.id }</label> |		
+		
+		
+		
+		<a href="/javaliproject/usuario/remover/${usuario.id }">remover</a><br>    
+	        
+	    	
+	    </c:if>
+		
+	</c:forEach>
+	<a href="/javaliproject/aluno/adicionar">Adicionar</a>
+	
 </body>
 </html>

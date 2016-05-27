@@ -26,8 +26,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
 	@Override
 	public List<Usuario> findAll() {
-		Query query = em.createNamedQuery("from usuario");
+		
+		Query query = em.createQuery("from usuario");
 		return query.getResultList();
+		
 	}
 
 	
