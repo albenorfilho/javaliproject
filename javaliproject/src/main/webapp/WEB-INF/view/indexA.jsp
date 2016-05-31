@@ -9,6 +9,7 @@
  <body>
  
  <h1>VOCÊ É ALUNO!</h1>
- 
+<p>Bem vindo, ${usuarioLogado.nome}! Seu id é ${usuarioLogado.id}</p>
+ <a href="logout">Sair do sistema</a>
  </body>
  </html>

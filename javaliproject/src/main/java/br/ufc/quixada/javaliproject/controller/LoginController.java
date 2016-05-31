@@ -2,6 +2,7 @@ package br.ufc.quixada.javaliproject.controller;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,20 @@ public class LoginController {
 @Inject
 private UsuarioService usuarioService;
 
+
+@RequestMapping(value = "/")
+public String index() {
+	return "redirect:/login";
+}
+
+
+@RequestMapping("logout")
+public String logout(HttpSession session) {
+	
+  session.invalidate();
+  return "redirect:/login";
+}
+
 @RequestMapping(value ="/login", method = RequestMethod.GET)
 public String adicionarForm(Model model) {
     model.addAttribute("usuario", new Usuario());
@@ -29,7 +44,7 @@ public String adicionarForm(Model model) {
 }
 
 @RequestMapping(value = "/login", method = RequestMethod.POST)
-public String login(@ModelAttribute("usuario") Usuario usuario) {  
+public String login(@ModelAttribute("usuario") Usuario usuario, HttpSession session) {  
 	if(usuario.getUsername().equals("deus")){
 		return "redirect:/usuario/listar";
 	}
@@ -42,6 +57,7 @@ public String login(@ModelAttribute("usuario") Usuario usuario) {
     }    
     if(usuarioLogin!=null){
         System.out.println(usuarioService.getUsuario(usuario.getUsername()).getNome());
+        session.setAttribute("usuarioLogado", usuarioLogin);
         if(usuarioLogin.getTipo().equals("P")){
         	return "indexP";
         }else if(usuarioLogin.getTipo().equals("A")){
@@ -50,32 +66,11 @@ public String login(@ModelAttribute("usuario") Usuario usuario) {
         
     }
         System.out.println("Houve um erro...");
-        return "login";
+        return "redirect:/login";
    
 }
 
 
 
 
-
-@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-public String loginerror(Model model) {
-    model.addAttribute("erro", "UsuÃ¡rio e/ou senha invÃ¡lidos");
-    return "login";
-}
-
-
-
-@RequestMapping(value = "/logout", method = RequestMethod.GET)
-public String logout() {
-    return "login";
-}
-
-
-public String doLogin(@RequestParam(value = "nome") String nome) {
-    if(nome!=null){
-        System.out.println(nome);
-    }
-    return "login";
-}
 }

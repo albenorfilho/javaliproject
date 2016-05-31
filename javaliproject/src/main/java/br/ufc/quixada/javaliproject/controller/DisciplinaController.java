@@ -18,10 +18,7 @@ public class DisciplinaController {
 	@Inject
 	private DisciplinaService disciplinaService;
 	
-	@RequestMapping(value = "/")
-	public String index() {
-		return "redirect:/listar";
-	}
+	
 	
 	@RequestMapping(value = "/listar")
 	public String listar(Model model) {
