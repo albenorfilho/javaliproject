@@ -29,7 +29,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void remover(Long id) {
+	public void remover(int id) {
 		Professor professor = professorRepository.findById(id);
 		professorRepository.remover(professor);
 	}

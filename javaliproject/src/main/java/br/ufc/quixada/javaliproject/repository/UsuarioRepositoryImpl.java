@@ -34,7 +34,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
 	
 	@Override
-	public Usuario findById(Long id) {
+	public Usuario findById(int id) {
 		return em.find(Usuario.class, id);
 	}
 	

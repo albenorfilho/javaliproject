@@ -10,7 +10,7 @@
 <body>
 	<h2>Nova disciplina</h2><br>
 	
-	<form:form id="adicionarDisciplinaForm" commandName="disciplina" servletRelativeAction="/adicionar" method="POST">
+	<form:form id="adicionarDisciplinaForm" commandName="disciplina" servletRelativeAction="/professor/adicionarDisciplina" method="POST">
 		<label>Nome: </label>
 		<form:input type="text" path="nome"/><br>
 		<label>Descrição: </label>

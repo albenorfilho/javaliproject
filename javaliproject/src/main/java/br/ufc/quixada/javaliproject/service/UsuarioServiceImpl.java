@@ -22,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
 	@Override
-	public void remover(Long id) {
+	public void remover(int id) {
 		Usuario usuario = usuarioRepository.findById(id);
 		usuarioRepository.remover(usuario);
 	}

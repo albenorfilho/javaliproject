@@ -37,7 +37,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 	}
 
 	@Override
-	public Professor findById(Long id) {
+	public Professor findById(int id) {
 		return em.find(Professor.class, id);
 	}
 	

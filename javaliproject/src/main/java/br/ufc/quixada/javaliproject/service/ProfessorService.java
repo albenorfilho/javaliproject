@@ -14,7 +14,7 @@ public interface ProfessorService {
 	
 	void salvar(Professor professor);
 	
-	void remover(Long id);
+	void remover(int id);
 	
 	Professor getProfessor(String siape);
 

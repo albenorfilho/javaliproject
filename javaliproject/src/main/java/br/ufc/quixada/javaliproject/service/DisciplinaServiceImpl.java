@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.ufc.quixada.javaliproject.model.Disciplina;
+import br.ufc.quixada.javaliproject.model.Professor;
 import br.ufc.quixada.javaliproject.repository.DisciplinaRepository;
 
 
@@ -19,6 +20,16 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 	public List<Disciplina> findAll() {
 		return disciplinaRepository.findAll();
 	}
+	
+	@Override
+	public List<Disciplina> findByIdProfessor(Professor professor) {
+		return disciplinaRepository.findByIdProfessor(professor);
+	}
+	
+	@Override
+	public Disciplina findById(int id) {
+		return disciplinaRepository.findById(id);
+	}
 
 	@Override
 	public void salvar(Disciplina disciplina) {
@@ -27,7 +38,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 	}
 
 	@Override
-	public void remover(Integer id) {
+	public void remover(int id) {
 		Disciplina disciplina = disciplinaRepository.findById(id);
 		disciplinaRepository.remover(disciplina);
 	}

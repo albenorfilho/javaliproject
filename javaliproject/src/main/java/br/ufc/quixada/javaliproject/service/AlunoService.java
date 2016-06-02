@@ -10,7 +10,7 @@ public interface AlunoService {
 	
 	void salvar(Aluno aluno);
 	
-	void remover(Long id);
+	void remover(int id);
 	
 	Aluno getAluno(String matricula);
 

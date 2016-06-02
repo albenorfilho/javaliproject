@@ -44,7 +44,7 @@ public class AlunoController {
 	}
 	
 	@RequestMapping(value = "/aluno/remover/{idUsuario}", method = RequestMethod.GET)
-	public String remover(@PathVariable("idUsuario") Long id) {
+	public String remover(@PathVariable("idUsuario") int id) {
 		alunoService.remover(id);
 		return "redirect:/aluno/listar";
 	}

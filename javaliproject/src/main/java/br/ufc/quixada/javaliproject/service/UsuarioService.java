@@ -10,7 +10,7 @@ public interface UsuarioService {
 	List<Usuario> findAll();
 	
 		
-	void remover(Long id);
+	void remover(int id);
 	
 	Usuario getUsuario(String matricula);
 

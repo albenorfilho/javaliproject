@@ -32,7 +32,7 @@ public class UsuarioController {
 		
 		
 	@RequestMapping(value = "/usuario/remover/{idUsuario}", method = RequestMethod.GET)
-	public String remover(@PathVariable("idUsuario") Long id) {
+	public String remover(@PathVariable("idUsuario") int id) {
 		usuarioService.remover(id);
 		return "redirect:/usuario/listar";
 	}

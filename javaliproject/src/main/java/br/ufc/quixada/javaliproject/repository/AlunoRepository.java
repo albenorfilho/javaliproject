@@ -12,7 +12,7 @@ public interface AlunoRepository {
 	
 	void salvar(Aluno aluno);
 	
-	Aluno findById(Long id);
+	Aluno findById(int id);
 	
 	Aluno findByMatricula(String Matricula);
 	

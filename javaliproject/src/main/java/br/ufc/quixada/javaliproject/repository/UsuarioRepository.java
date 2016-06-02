@@ -12,7 +12,7 @@ public interface UsuarioRepository {
 	List<Usuario> findAll();
 	
 		
-	Usuario findById(Long id);
+	Usuario findById(int id);
 	
 	Usuario findByUsername(String username);
 	

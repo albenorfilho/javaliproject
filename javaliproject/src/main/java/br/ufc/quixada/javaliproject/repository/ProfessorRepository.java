@@ -13,7 +13,7 @@ public interface ProfessorRepository {
 	
 	void salvar(Professor professor);
 	
-	Professor findById(Long id);
+	Professor findById(int id);
 	
 	Professor findBySiape(String siape);
 	

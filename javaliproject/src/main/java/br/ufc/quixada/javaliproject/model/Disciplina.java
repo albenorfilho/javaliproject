@@ -2,6 +2,7 @@ package br.ufc.quixada.javaliproject.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,25 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name="disciplina")
 public class Disciplina {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private int id;
+	@Column
 	private String nome;
+	@Column
 	private String descricao;
 	@ManyToOne
 	@JoinColumn(name = "professor") 
 	private Professor professor;
 	@ManyToMany(mappedBy="disciplinas")
 	private List<Aluno> alunos;
+	@OneToMany(mappedBy="disciplina", cascade=CascadeType.ALL)
+	private List<Atividade> atividades;
+	
+	
+	
+	
+	
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
 
-	
-	
-	
-	
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
@@ -45,11 +59,11 @@ public class Disciplina {
 		this.professor = professor;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

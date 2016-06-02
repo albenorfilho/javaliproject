@@ -36,7 +36,7 @@ public class AlunoRepositoryImpl implements AlunoRepository {
 	}
 
 	@Override
-	public Aluno findById(Long id) {
+	public Aluno findById(int id) {
 		return em.find(Aluno.class, id);
 	}
 	

@@ -59,9 +59,9 @@ public String login(@ModelAttribute("usuario") Usuario usuario, HttpSession sess
         System.out.println(usuarioService.getUsuario(usuario.getUsername()).getNome());
         session.setAttribute("usuarioLogado", usuarioLogin);
         if(usuarioLogin.getTipo().equals("P")){
-        	return "indexP";
+        	return "redirect:/professor/indexP";
         }else if(usuarioLogin.getTipo().equals("A")){
-        	return "indexA";
+        	return "redirect:/aluno/indexA";
         }
         
     }
