@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.ufc.quixada.javaliproject.model.Atividade;
 import br.ufc.quixada.javaliproject.model.Item;
 import br.ufc.quixada.javaliproject.repository.ItemRepository;
 
@@ -19,6 +20,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<Item> findAll() {
 		return itemRepository.findAll();
+	}
+	
+	@Override
+	public List<Item> findByAtividade(Atividade atividade) {
+		return itemRepository.findByAtividade(atividade);
+	}
+	
+	@Override
+	public Item findById(int id) {
+		return itemRepository.findById(id);
 	}
 
 	@Override

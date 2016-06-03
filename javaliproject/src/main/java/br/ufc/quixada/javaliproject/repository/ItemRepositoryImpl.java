@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufc.quixada.javaliproject.model.Atividade;
 import br.ufc.quixada.javaliproject.model.Item;
 
 
@@ -30,6 +31,20 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return query.getResultList();
 	}
 
+	
+	@Override
+	public List<Item> findByAtividade(Atividade atividade) {
+		Query query = em.createQuery("from item where atividade=:atividade");
+		query.setParameter("atividade", atividade);
+		return query.getResultList();
+		
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	@Transactional
 	public void salvar(Item item) {

@@ -30,7 +30,10 @@ public class AtividadeServiceImpl implements AtividadeService {
 		return atividadeRepository.findByDisciplina(disciplina);
 	}
 	
-	
+	@Override
+	public Atividade findById(int id) {
+		return atividadeRepository.findById(id);
+	}
 
 	@Override
 	public void salvar(Atividade atividade, Disciplina disciplina) {

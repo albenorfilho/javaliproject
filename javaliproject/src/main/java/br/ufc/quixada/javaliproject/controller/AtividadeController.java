@@ -1,8 +1,16 @@
 package br.ufc.quixada.javaliproject.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +23,7 @@ import br.ufc.quixada.javaliproject.model.Disciplina;
 import br.ufc.quixada.javaliproject.model.Professor;
 import br.ufc.quixada.javaliproject.service.AtividadeService;
 import br.ufc.quixada.javaliproject.service.DisciplinaService;
+import br.ufc.quixada.javaliproject.service.ItemService;
 
 
 
@@ -25,11 +34,20 @@ public class AtividadeController {
 	@Inject
 	private AtividadeService atividadeService;
 	@Inject
+	private ItemService itemService;
+	@Inject
 	private DisciplinaService disciplinaService;
+	@Autowired
+	private ServletContext servletContext;
 	
-	@RequestMapping(value = "/atividade")
-	public String index() {
-		return "redirect:/atividade/listar";
+	@RequestMapping(value = "/atividade/index/{id}")
+	public String index(Model model, @PathVariable("id") int id) {
+		Atividade atividade = atividadeService.findById(id);
+		model.addAttribute("atividade", atividade);
+		
+		model.addAttribute("itens", itemService.findByAtividade(atividade));
+
+		return "atividade/index_atividade";
 	}
 	
 	@RequestMapping(value = "/atividade/listar")
@@ -48,12 +66,28 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(value = "/disciplina/adicionarAtividade", method = RequestMethod.POST)
-	public String adicionar(@ModelAttribute("atividade") Atividade atividade) {
+	public String adicionar(@ModelAttribute("atividade") Atividade atividade) throws IOException {
 		
-		System.out.println("Nós do post pegamos o id. É esse:" + idDisciplina);
+		
 
 		Disciplina disciplina = disciplinaService.findById(idDisciplina);
 		atividadeService.salvar(atividade, disciplina);
+		
+		File pasta = new File(servletContext.getRealPath("/") + "Storage/Disciplinas/" + disciplina.getId() + "/" + atividade.getIdAtividade());
+		pasta.mkdir();
+		System.out.println(Files.isDirectory(pasta.toPath()));
+		System.out.println(pasta.toPath() + "<-----------------------");
+		
+		DirectoryStream <Path> diretorio = Files.newDirectoryStream(new File(servletContext.getRealPath("/") + "storage/Disciplinas/" + disciplina.getId()).toPath());//
+        System.out.println("Diretório de Atividades - Pastas:");
+		for(Path path : diretorio){
+         System.out.println("/" + path.getFileName());
+          }
+		
+		
+		
+		
+		
 		return "redirect:/disciplina/index/" + idDisciplina;
 	}
 	

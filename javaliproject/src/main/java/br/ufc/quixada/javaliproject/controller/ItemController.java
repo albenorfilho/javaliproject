@@ -1,7 +1,15 @@
 package br.ufc.quixada.javaliproject.controller;
 
-import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,7 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.ufc.quixada.javaliproject.model.Atividade;
+import br.ufc.quixada.javaliproject.model.Disciplina;
 import br.ufc.quixada.javaliproject.model.Item;
+import br.ufc.quixada.javaliproject.service.AtividadeService;
 import br.ufc.quixada.javaliproject.service.ItemService;
 
 
@@ -19,10 +30,19 @@ public class ItemController {
 	
 	@Inject
 	private ItemService itemService;
+	@Inject
+	private AtividadeService atividadeService;
+	@Autowired
+	private ServletContext servletContext;
 	
-	@RequestMapping(value = "/item")
-	public String index() {
-		return "redirect:/item/listar";
+	
+	@RequestMapping(value = "/item/index/{id}")
+	public String index(Model model, @PathVariable("id") int id) {
+		Item item = itemService.findById(id);
+		model.addAttribute("item", item);
+		
+
+		return "item/index_item";
 	}
 	
 	@RequestMapping(value = "/item/listar")
@@ -32,17 +52,49 @@ public class ItemController {
 		return "listar_item";  //Aqui vai o nome da jsp
 	}
 	
-	@RequestMapping(value ="/item/adicionar", method = RequestMethod.GET)
-	public String adicionarForm(Model model) {
+	
+	
+	int idAtividade;
+	@RequestMapping(value ="/atividade/adicionarItem/{idAtividade}", method = RequestMethod.GET)
+	public String adicionarForm(Model model, @PathVariable("idAtividade") int id) {
 		model.addAttribute("item", new Item());
-		return "adicionar_item"; //Aqui vai o nome da jsp
+		//System.out.println("Nós do get pegamos o id. É esse:" + id);
+		idAtividade = id;
+		return "atividade/adicionar_item"; //Aqui vai o nome da jsp
 	}
 	
-	@RequestMapping(value = "/item/adicionar", method = RequestMethod.POST)
-	public String adicionar(@ModelAttribute("item") Item item) {
+	@RequestMapping(value = "/atividade/adicionarItem", method = RequestMethod.POST)
+	public String adicionar(@ModelAttribute("item") Item item) throws IOException {
+		
+		
+
+		Atividade atividade = atividadeService.findById(idAtividade);
+		item.setAtividade(atividade);
 		itemService.salvar(item);
-		return "redirect:/item/listar";
+		
+		File pasta = new File(servletContext.getRealPath("/") + "Storage/Disciplinas/" + atividade.getDisciplina().getId() + "/" + atividade.getIdAtividade() + "/" + item.getIdItem());
+		pasta.mkdir();
+		System.out.println(Files.isDirectory(pasta.toPath()));
+		System.out.println(pasta.toPath() + "<-----------------------");
+		
+		DirectoryStream <Path> diretorio = Files.newDirectoryStream(new File(servletContext.getRealPath("/") + "storage/Disciplinas/" + atividade.getDisciplina().getId() + "/" + atividade.getIdAtividade()).toPath());//
+        System.out.println("Diretório de Itens - Pastas:");
+		for(Path path : diretorio){
+         System.out.println("/" + path.getFileName());
+          }
+		
+		
+		
+		
+		
+		return "redirect:/atividade/index/" + idAtividade;
 	}
+
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/item/remover/{idItem}", method = RequestMethod.GET)
 	public String remover(@PathVariable("idItem") int id) {

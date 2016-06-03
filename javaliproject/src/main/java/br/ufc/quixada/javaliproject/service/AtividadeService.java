@@ -14,6 +14,8 @@ public interface AtividadeService {
 	
 	List<Atividade> findByIdDisciplina(int n);
 	
+	Atividade findById(int n);
+	
 	void salvar(Atividade atividade, Disciplina disciplina);
 	
 	void remover(int id);

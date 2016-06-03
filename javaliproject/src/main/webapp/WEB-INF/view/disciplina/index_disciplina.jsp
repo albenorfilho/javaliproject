@@ -20,6 +20,7 @@
 		<label>Descrição: ${atividade.descricao }</label> | 
 		
 		<a href="/javaliproject/disciplina/removerAtividade/${disciplina.id}/${atividade.idAtividade }">remover |</a><br>
+	<a href="/javaliproject/atividade/index/${atividade.idAtividade }">Entrar</a><br>
 	</c:forEach>
 	<a href="/javaliproject/disciplina/adicionarAtividade/${disciplina.id}">Adicionar</a>
 	

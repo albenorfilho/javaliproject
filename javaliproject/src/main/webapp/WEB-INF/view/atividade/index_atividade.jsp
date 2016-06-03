@@ -9,20 +9,19 @@
  </head>
  <body>
  
- <h1>${disciplina.nome }</h1>
+ <h1>${atividade.titulo }</h1>
 
-<label>Descrição: ${disciplina.descricao }</label>
+<label>Descrição: ${atividade.descricao }</label>
 
 
-<h2>Atividades</h2>
-	<c:forEach items="${atividades}" var="atividade">
-		<label>Titulo: ${atividade.titulo }</label> | 
-		<label>Descrição: ${atividade.descricao }</label> | 
-		
-		<a href="/javaliproject/disciplina/removerAtividade/${atividade.id }">remover |</a><br>
-	<a href="/javaliproject/atividade/index/${atividade.id }">Entrar</a><br>
+<h2>Itens</h2>
+	<c:forEach items="${itens}" var="item">
+		<label>Titulo: ${item.titulo }</label> | 
+		<label>Descrição: ${item.descricao}</label> | <br>
+		<a href="/javaliproject/item/index/${item.idItem}">Entrar</a><br>
 	</c:forEach>
-	<a href="/javaliproject/atividade/adicionarAtividade">Adicionar</a>
+	<br>
+	<a href="/javaliproject/atividade/adicionarItem/${atividade.idAtividade}">Adicionar</a>
 	
 
 
