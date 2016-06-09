@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +22,7 @@ public class Aluno extends Usuario{
 	
 	@Column
 	private String matricula;
-	 @ManyToMany
-     @JoinTable(name="aluno_tem_disciplinas", joinColumns={@JoinColumn(name="aluno_id")}, inverseJoinColumns={@JoinColumn(name="disciplina_id")})
+	@ManyToMany(fetch=FetchType.EAGER)
 	 private List<Disciplina> disciplinas;
 	
 	

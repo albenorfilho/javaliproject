@@ -47,6 +47,21 @@ public class AlunoRepositoryImpl implements AlunoRepository {
 		return (Aluno) q.getSingleResult();
 	}
 	
+
+	@Override
+	@Transactional
+	public void update(Aluno aluno) {
+		/*Query q = em.createQuery("UPDATE aluno SET disciplinas =: disciplinas WHERE id =:id");
+		q.setParameter("disciplinas", aluno.getDisciplinas());
+		q.setParameter("id", aluno.getId());
+		q.executeUpdate();*/
+		
+		em.merge(aluno);
+		
+	}
+	
+	
+	
 	
 	@Override
 	@Transactional

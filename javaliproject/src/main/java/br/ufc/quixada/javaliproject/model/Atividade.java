@@ -20,6 +20,8 @@ public class Atividade {
 	private int idAtividade;
 	@Column
 	private String titulo;
+
+	
 	@Column
 	private String descricao;
 	@ManyToOne
@@ -28,11 +30,6 @@ public class Atividade {
 	
 	@OneToMany(mappedBy="atividade", cascade=CascadeType.ALL)
 	private List<Item> itens;
-	
-	
-	
-	
-	
 	
 	public List<Item> getItens() {
 		return itens;

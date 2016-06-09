@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +27,9 @@ public class Disciplina {
 	@ManyToOne
 	@JoinColumn(name = "professor") 
 	private Professor professor;
-	@ManyToMany(mappedBy="disciplinas")
+	@ManyToMany(mappedBy="disciplinas", fetch=FetchType.EAGER)
 	private List<Aluno> alunos;
+	
 	@OneToMany(mappedBy="disciplina", cascade=CascadeType.ALL)
 	private List<Atividade> atividades;
 	

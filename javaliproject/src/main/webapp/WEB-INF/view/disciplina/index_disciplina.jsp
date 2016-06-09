@@ -18,11 +18,19 @@
 	<c:forEach items="${atividades}" var="atividade">
 		<label>Titulo: ${atividade.titulo }</label> | 
 		<label>Descrição: ${atividade.descricao }</label> | 
-		
-		<a href="/javaliproject/disciplina/removerAtividade/${disciplina.id}/${atividade.idAtividade }">remover |</a><br>
+		<% if(session.getAttribute("usuarioLogado")!=null) %>
+		<c:set var="tipo" scope="session" value="${usuarioLogado.tipo}"/>
+		<c:if test="${tipo == 'D' || tipo=='P'}">
+   		<a href="/javaliproject/disciplina/removerAtividade/${disciplina.id}/${atividade.idAtividade }">remover |</a>
+  		</c:if>
+		<br>
 	<a href="/javaliproject/atividade/index/${atividade.idAtividade }">Entrar</a><br>
 	</c:forEach>
-	<a href="/javaliproject/disciplina/adicionarAtividade/${disciplina.id}">Adicionar</a>
+	<c:if test="${tipo == 'D' || tipo=='P'}">
+   	<a href="/javaliproject/disciplina/adicionarAtividade/${disciplina.id}">Adicionar</a><br>
+  	</c:if>
+	
+	
 	
 
 

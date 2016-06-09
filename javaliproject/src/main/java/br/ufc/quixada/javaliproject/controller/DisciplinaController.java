@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.ufc.quixada.javaliproject.Pasta;
 import br.ufc.quixada.javaliproject.model.Disciplina;
 import br.ufc.quixada.javaliproject.model.Professor;
 import br.ufc.quixada.javaliproject.service.AtividadeService;

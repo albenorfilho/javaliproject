@@ -37,7 +37,8 @@ public class Usuario implements Serializable{
 	private String senha;
 	@Column
 	private String foto;
-	
+	@Column(insertable=false, updatable=false)
+	private String tipo;
 	
 	
 	
@@ -47,8 +48,7 @@ public class Usuario implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	@Column(insertable=false, updatable=false)
-	private String tipo;
+	
 	
 	public String getTipo() {
 		return tipo;

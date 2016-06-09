@@ -18,12 +18,27 @@
 	<c:forEach items="${itens}" var="item">
 		<label>Titulo: ${item.titulo }</label> | 
 		<label>Descrição: ${item.descricao}</label> | <br>
-		<a href="/javaliproject/item/index/${item.idItem}">Entrar</a><br>
+		<% if(session.getAttribute("usuarioLogado")!=null) %>
+		<c:set var="tipo" scope="session" value="${usuarioLogado.tipo}"/>
+		<c:if test="${tipo == 'A'}">
+  		<a href="/javaliproject/item/index/${item.idItem}">Adicionar Submissão</a><br>
+  		</c:if>
+		
 	</c:forEach>
 	<br>
-	<a href="/javaliproject/atividade/adicionarItem/${atividade.idAtividade}">Adicionar</a>
-	
+	<% if(session.getAttribute("usuarioLogado")!=null) %>
+		<c:set var="tipo" scope="session" value="${usuarioLogado.tipo}"/>
+		<c:if test="${tipo == 'D' || tipo=='P'}">
+   		<a href="/javaliproject/atividade/adicionarItem/${atividade.idAtividade}">Adicionar</a>
+  		</c:if>
+	<!-- 
+	<form:form id="adicionarSubmissaoItemForm" enctype="multipart/form-data" commandName="item" servletRelativeAction="/atividade/adicionarSubmissaoItem" method="POST">
+		<label>Arquivo java: </label>
+		<input type="file" id="myfile" name="javafile" /><br>
+		
+		<input type="submit" value="Adicionar"/>
+	</form:form>
 
-
+ -->
  </body>
  </html>

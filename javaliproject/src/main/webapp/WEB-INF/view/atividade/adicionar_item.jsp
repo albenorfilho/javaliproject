@@ -9,7 +9,7 @@
 <body>
 	<h2>Novo Item</h2><br>
 	
-	<form:form id="adicionarItemForm" commandName="item" servletRelativeAction="/atividade/adicionarItem" method="POST">
+	<form:form id="adicionarItemForm" enctype="multipart/form-data" commandName="item" servletRelativeAction="/atividade/adicionarItem" method="POST">
 		<label>Título: </label>
 		<form:input type="text" path="titulo"/><br>
 		<label>Descrição: </label>
@@ -17,9 +17,13 @@
 		<label>Pontuação para este item: </label>
 		<form:input type="number" path="pontuacao"/><br>
 		<label>Caso de Teste: </label>
-		<input type="file" id="myfile" name="javafile"/><br>
+		<input type="file" id="myfile" name="javafile" /><br>
 		
 		<input type="submit" value="Adicionar"/>
 	</form:form>
+	
+	
+	
+	
 </body>
 </html>

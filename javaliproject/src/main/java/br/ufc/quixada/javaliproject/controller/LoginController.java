@@ -45,9 +45,6 @@ public String adicionarForm(Model model) {
 
 @RequestMapping(value = "/login", method = RequestMethod.POST)
 public String login(@ModelAttribute("usuario") Usuario usuario, HttpSession session) {  
-	if(usuario.getUsername().equals("deus")){
-		return "redirect:/usuario/listar";
-	}
 	
     Usuario usuarioLogin = null;
     try{ //Verifica se a query retorna um valor válido
@@ -62,6 +59,8 @@ public String login(@ModelAttribute("usuario") Usuario usuario, HttpSession sess
         	return "redirect:/professor/indexP";
         }else if(usuarioLogin.getTipo().equals("A")){
         	return "redirect:/aluno/indexA";
+        }else if(usuarioLogin.getTipo().equals("D")){
+        	return "redirect:/usuario/listar";
         }
         
     }

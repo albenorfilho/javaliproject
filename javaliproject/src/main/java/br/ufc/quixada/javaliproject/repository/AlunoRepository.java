@@ -12,6 +12,8 @@ public interface AlunoRepository {
 	
 	void salvar(Aluno aluno);
 	
+	void update(Aluno aluno);
+	
 	Aluno findById(int id);
 	
 	Aluno findByMatricula(String Matricula);

@@ -30,6 +30,14 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
+	public void update(Aluno aluno) {
+		alunoRepository.update(aluno);
+		
+	}
+
+	
+	
+	@Override
 	public void remover(int id) {
 		Aluno aluno = alunoRepository.findById(id);
 		alunoRepository.remover(aluno);

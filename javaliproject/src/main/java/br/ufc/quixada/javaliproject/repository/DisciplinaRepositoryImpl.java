@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufc.quixada.javaliproject.model.Aluno;
 import br.ufc.quixada.javaliproject.model.Disciplina;
 import br.ufc.quixada.javaliproject.model.Professor;
 
@@ -34,6 +35,16 @@ public class DisciplinaRepositoryImpl implements DisciplinaRepository {
 	public List<Disciplina> findByIdProfessor(Professor professor) {
 		Query query = em.createQuery("from disciplina where professor=:professor ");
 		query.setParameter("professor", professor);
+		return query.getResultList();
+	}
+	
+	
+	public List<Disciplina> findByAluno(Aluno aluno) {
+		//ESSE METODO TÁ BUGADO
+		String consulta = "Select disciplina d from Disciplina d join d.alunos t join t.district t where t.name = :name";
+        Query query = em.createQuery(consulta);
+        query.setParameter("id", aluno.getId());
+       
 		return query.getResultList();
 	}
 	
