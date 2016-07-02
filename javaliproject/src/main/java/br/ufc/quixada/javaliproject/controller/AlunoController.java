@@ -48,8 +48,7 @@ public class AlunoController {
 	public String listarDisciplinas(Model model, HttpSession session) {
 		Aluno alunoLogado = (Aluno)session.getAttribute("usuarioLogado");
 		
-		//System.out.println(disciplinaService.findAll().size());
-		//model.addAttribute("disciplinas", disciplinaService.findByAluno(alunoLogado));
+		
 		model.addAttribute("disciplinas", alunoLogado.getDisciplinas());
 		return "aluno/indexA"; //Aqui vai o caminho da jsp
 	}
@@ -58,7 +57,7 @@ public class AlunoController {
 	
 	@RequestMapping(value = "/aluno/listar")
 	public String listar(Model model) {
-		System.out.println(alunoService.findAll().size());
+		
 		model.addAttribute("alunos", alunoService.findAll());
 		return "listar_aluno";  //Aqui vai o nome da jsp
 	}
@@ -72,7 +71,7 @@ public class AlunoController {
 	@RequestMapping(value = "/aluno/adicionar", method = RequestMethod.POST)
 	public String adicionar(@ModelAttribute("aluno") Aluno aluno) {
 		alunoService.salvar(aluno);
-		return "redirect:/aluno/listar";
+		return "redirect:/login";
 	}
 	
 	

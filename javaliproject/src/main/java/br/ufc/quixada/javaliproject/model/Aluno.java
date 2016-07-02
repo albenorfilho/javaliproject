@@ -25,7 +25,8 @@ public class Aluno extends Usuario{
 	@ManyToMany(fetch=FetchType.EAGER)
 	 private List<Disciplina> disciplinas;
 	
-	
+	@OneToMany
+	List<Arquivo> arquivos;
 	
 	
 	

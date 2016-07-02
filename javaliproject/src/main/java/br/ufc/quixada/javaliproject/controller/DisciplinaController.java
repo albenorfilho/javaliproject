@@ -39,7 +39,7 @@ public class DisciplinaController {
 	
 	@RequestMapping(value ="/listar")
 	public String listar(Model model) {
-		System.out.println(disciplinaService.findAll().size());
+		
 		model.addAttribute("disciplinas", disciplinaService.findAll());
 		return "listar";
 	}
@@ -57,17 +57,17 @@ public class DisciplinaController {
 		disciplina.setProfessor(professorLogado);
 		disciplinaService.salvar(disciplina); 
 			
+		File pastaRaiz = new File(servletContext.getRealPath("/") + "Storage");
+		pastaRaiz.mkdir();
+		File pastaDisciplinas = new File(servletContext.getRealPath("/") + "Storage/Disciplinas");
+		pastaDisciplinas.mkdir();
 		File pasta = new File(servletContext.getRealPath("/") + "Storage/Disciplinas/" + disciplina.getId());
-		pasta.mkdir();
-		System.out.println(Files.isDirectory(pasta.toPath()));
-		System.out.println(pasta.toPath() + "<-----------------------");
-		
-		DirectoryStream <Path> diretorio = Files.newDirectoryStream(new File(servletContext.getRealPath("/") + "storage/Disciplinas/").toPath());//
-        System.out.println("Diretório de Disciplinas - Pastas:");
-		for(Path path : diretorio){
-         System.out.println("/" + path.getFileName());
-          }
 
+		pasta.mkdir();
+		
+		
+		DirectoryStream <Path> diretorio = Files.newDirectoryStream(new File(servletContext.getRealPath("/") + "Storage/Disciplinas/").toPath());//
+       
 		
 		
 		

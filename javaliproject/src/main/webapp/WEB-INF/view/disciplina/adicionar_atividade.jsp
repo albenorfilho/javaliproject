@@ -8,7 +8,7 @@
 <title>Listar Disciplinas</title>
 </head>
 <body>
-	<h2>Nova disciplina</h2><br>
+	<h2>Nova atividade</h2><br>
 	
 	<form:form id="adicionarAtividadeForm" commandName="atividade" servletRelativeAction="/disciplina/adicionarAtividade" method="POST">
 		<label>Título: </label>

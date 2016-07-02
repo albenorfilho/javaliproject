@@ -52,7 +52,7 @@ public String login(@ModelAttribute("usuario") Usuario usuario, HttpSession sess
     }catch (NoResultException nre){
         //Ignore this 
     }    
-    if(usuarioLogin!=null){
+    if(usuarioLogin!=null && usuarioLogin.getSenha().equals(usuario.getSenha())){
         System.out.println(usuarioService.getUsuario(usuario.getUsername()).getNome());
         session.setAttribute("usuarioLogado", usuarioLogin);
         if(usuarioLogin.getTipo().equals("P")){

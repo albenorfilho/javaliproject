@@ -52,7 +52,7 @@ public class AtividadeController {
 	
 	@RequestMapping(value = "/atividade/listar")
 	public String listar(Model model) {
-		System.out.println(atividadeService.findAll().size());
+		
 		model.addAttribute("itens", atividadeService.findAll());
 		return "listar_atividade";  //Aqui vai o nome da jsp
 	}
@@ -60,7 +60,7 @@ public class AtividadeController {
 	@RequestMapping(value ="/disciplina/adicionarAtividade/{idDisciplina}", method = RequestMethod.GET)
 	public String adicionarForm(Model model, @PathVariable("idDisciplina") int id) {
 		model.addAttribute("atividade", new Atividade());
-		System.out.println("Nós do get pegamos o id. É esse:" + id);
+		
 		idDisciplina = id;
 		return "disciplina/adicionar_atividade"; //Aqui vai o nome da jsp
 	}
@@ -75,13 +75,13 @@ public class AtividadeController {
 		
 		File pasta = new File(servletContext.getRealPath("/") + "Storage/Disciplinas/" + disciplina.getId() + "/" + atividade.getIdAtividade());
 		pasta.mkdir();
-		System.out.println(Files.isDirectory(pasta.toPath()));
-		System.out.println(pasta.toPath() + "<-----------------------");
+		
+		
 		
 		DirectoryStream <Path> diretorio = Files.newDirectoryStream(new File(servletContext.getRealPath("/") + "storage/Disciplinas/" + disciplina.getId()).toPath());//
-        System.out.println("Diretório de Atividades - Pastas:");
+       
 		for(Path path : diretorio){
-         System.out.println("/" + path.getFileName());
+       
           }
 		
 		
@@ -103,5 +103,12 @@ public class AtividadeController {
 		atividadeService.remover(id);
 		return "redirect:/atividade/listar";
 	}
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -26,6 +26,8 @@
 		<br>
 	<a href="/javaliproject/atividade/index/${atividade.idAtividade }">Entrar</a><br>
 	</c:forEach>
+	<% if(session.getAttribute("usuarioLogado")!=null) %>
+		<c:set var="tipo" scope="session" value="${usuarioLogado.tipo}"/>
 	<c:if test="${tipo == 'D' || tipo=='P'}">
    	<a href="/javaliproject/disciplina/adicionarAtividade/${disciplina.id}">Adicionar</a><br>
   	</c:if>

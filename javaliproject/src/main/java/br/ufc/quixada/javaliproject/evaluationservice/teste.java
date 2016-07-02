@@ -1,20 +1,13 @@
 package br.ufc.quixada.javaliproject.evaluationservice;
-import static org.junit.Assert.*;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+public class teste {
 
-
-
-
-
-public class Runner {
 	@Test
-	public static String runClass() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
-		
+	public static String test() {
 		int retornoEsperado = 9;
 		int retornoFeito = 10;
 		
@@ -30,11 +23,7 @@ public class Runner {
         }
         
     	return "Executou!";	
-    	
-    	
 
 	}
-	
-	
 
 }

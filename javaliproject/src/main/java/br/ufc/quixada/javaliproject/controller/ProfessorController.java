@@ -34,7 +34,6 @@ public class ProfessorController {
 	public String listarDisciplinas(Model model, HttpSession session) {
 		Professor professorLogado = (Professor)session.getAttribute("usuarioLogado");
 		
-		System.out.println(disciplinaService.findAll().size());
 		model.addAttribute("disciplinas", disciplinaService.findByIdProfessor(professorLogado));
 		return "professor/indexP"; //Aqui vai o caminho da jsp
 	}
@@ -42,7 +41,6 @@ public class ProfessorController {
 	
 	@RequestMapping(value = "/professor/listar")
 	public String listar(Model model) {
-		System.out.println(professorService.findAll().size());
 		model.addAttribute("professores", professorService.findAll());
 		return "listar_professor";  //Aqui vai o nome da jsp
 	}

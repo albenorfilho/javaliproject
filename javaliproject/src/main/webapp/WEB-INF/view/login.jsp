@@ -24,13 +24,15 @@
 							<form:form id="loginForm" commandName="usuario" servletRelativeAction="/login" method="POST">
 								<label>Username: </label>
 								<form:input type="text" path="username"/><br>
+								<label>Senha: </label>
+								<form:input type="password" path="senha"/><br>
 								
 								
 								<input type="submit" value="login"/>
 							</form:form>
 						</div>
 					</div>
-
+		  	<a href="/javaliproject/aluno/adicionar">Inscrever-se</a><br>
 		</div>
 	</div>
 

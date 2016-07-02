@@ -21,7 +21,7 @@
 		<% if(session.getAttribute("usuarioLogado")!=null) %>
 		<c:set var="tipo" scope="session" value="${usuarioLogado.tipo}"/>
 		<c:if test="${tipo == 'A'}">
-  		<a href="/javaliproject/item/index/${item.idItem}">Adicionar Submissão</a><br>
+  		<a href="/javaliproject/item/submissao/${item.idItem}">Adicionar Submissão</a><br>
   		</c:if>
 		
 	</c:forEach>

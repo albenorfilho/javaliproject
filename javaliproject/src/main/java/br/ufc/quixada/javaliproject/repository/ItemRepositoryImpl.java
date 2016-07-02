@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufc.quixada.javaliproject.evaluationservice.Associacao;
 import br.ufc.quixada.javaliproject.model.Atividade;
 import br.ufc.quixada.javaliproject.model.Item;
 

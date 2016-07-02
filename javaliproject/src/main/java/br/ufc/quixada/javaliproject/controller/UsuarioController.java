@@ -24,7 +24,6 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/usuario/listar")
 	public String listar(Model model) {
-		System.out.println(usuarioService.findAll().size());
 		model.addAttribute("usuarios", usuarioService.findAll());
 		return "listar_usuario";  //Aqui vai o nome da jsp
 	}

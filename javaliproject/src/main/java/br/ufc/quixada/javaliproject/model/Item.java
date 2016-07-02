@@ -1,13 +1,24 @@
 package br.ufc.quixada.javaliproject.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import br.ufc.quixada.javaliproject.evaluationservice.Associacao;
 
 @Entity(name="item")
 public class Item {
@@ -21,13 +32,33 @@ public class Item {
 	private String descricao;
 	@Column
 	private double pontuacao;
+	@OneToMany
+	@JoinColumn(name="id_arquivo")
+	private List<Arquivo> arquivos;
+	
 	@Column
-	private String arquivo;
+	private String casoDeTeste;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
+	//@LazyCollection(LazyCollectionOption.EXTRA)
+	private List<Associacao> associacoes;
+	
 	@ManyToOne
 	@JoinColumn(name = "atividade") 
 	private Atividade atividade;
+	
+	public Item(){
+		this.associacoes = new ArrayList<>();
+	}
+	
 	public int getIdItem() {
 		return idItem;
+	}
+	public List<Associacao> getAssociacoes() {
+		return associacoes;
+	}
+	public void setAssociacoes(List<Associacao> associacoes) {
+		this.associacoes = associacoes;
 	}
 	public void setIdItem(int idItem) {
 		this.idItem = idItem;
@@ -50,11 +81,11 @@ public class Item {
 	public void setPontuacao(double pontuacao) {
 		this.pontuacao = pontuacao;
 	}
-	public String getArquivo() {
-		return arquivo;
+	public String getCasoDeTeste() {
+		return casoDeTeste;
 	}
-	public void setArquivo(String arquivo) {
-		this.arquivo = arquivo;
+	public void setArquivo(String casoDeTeste) {
+		this.casoDeTeste = casoDeTeste;
 	}
 	public Atividade getAtividade() {
 		return atividade;
