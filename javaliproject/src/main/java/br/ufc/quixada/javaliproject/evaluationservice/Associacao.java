@@ -1,25 +1,31 @@
 package br.ufc.quixada.javaliproject.evaluationservice;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import br.ufc.quixada.javaliproject.model.Item;
 
 @Entity
+@Table(name="associacao")
 public class Associacao {
  
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private int id;
+ @Column(name="testenome")
  private String testeNome;
+ @Column(name="classenome")
  private String classeNome;
- 	@ManyToOne
-	@JoinColumn(name="item")
-	Item item;
+ 	
+ @ManyToOne
+	@JoinColumn(name = "item")
+ Item item;
  
  public Item getItem() {
 		return item;

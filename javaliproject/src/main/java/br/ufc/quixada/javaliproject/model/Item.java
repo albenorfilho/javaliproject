@@ -4,6 +4,7 @@ package br.ufc.quixada.javaliproject.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -28,7 +30,7 @@ public class Item {
 	private int idItem;
 	@Column
 	private String titulo;
-	@Column
+	@Column(length=1000)
 	private String descricao;
 	@Column
 	private double pontuacao;
@@ -40,7 +42,7 @@ public class Item {
 	private String casoDeTeste;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
-	//@LazyCollection(LazyCollectionOption.EXTRA)
+	
 	private List<Associacao> associacoes;
 	
 	@ManyToOne

@@ -8,6 +8,7 @@
   <persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 	<class>br.ufc.quixada.javaliproject.model.Disciplina</class>
+	<class>br.ufc.quixada.javaliproject.evaluationservice.Associacao</class>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update" />
       <property name="hibernate.format_sql" value="true" />

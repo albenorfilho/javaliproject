@@ -1,7 +1,14 @@
 package br.ufc.quixada.javaliproject.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -26,10 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.quixada.javaliproject.evaluationservice.Associacao;
 import br.ufc.quixada.javaliproject.evaluationservice.Avalia;
+import br.ufc.quixada.javaliproject.evaluationservice.ResultadoAvaliacao;
 import br.ufc.quixada.javaliproject.model.Aluno;
 import br.ufc.quixada.javaliproject.model.Atividade;
 import br.ufc.quixada.javaliproject.model.Disciplina;
 import br.ufc.quixada.javaliproject.model.Item;
+import br.ufc.quixada.javaliproject.service.AssociacaoService;
 import br.ufc.quixada.javaliproject.service.AtividadeService;
 import br.ufc.quixada.javaliproject.service.ItemService;
 
@@ -42,6 +51,8 @@ public class ItemController {
 	private ItemService itemService;
 	@Inject
 	private AtividadeService atividadeService;
+	@Inject
+	AssociacaoService associacaoService;
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -150,16 +161,17 @@ public class ItemController {
 		
 		
       //O código abaixo é testando a avaliação
-      
+		ResultadoAvaliacao resultado = new ResultadoAvaliacao();
         String message = "";
+        
 		try {
 			System.out.println("****************PAI: " + caminhoPai);
 			System.out.println("****************FILHO: " + caminhofilho);
-			List<Associacao> associacoes = item.getAssociacoes();
-			//DESAMARRAR
-			//associacoes.add(new Associacao("implementacao.CalculadoraImpl", "teste.TesteCalculadora"));
-			//associacoes.add(new Associacao("implementacao.PerfilImpl", "teste.TestePerfil"));
-			message = Avalia.run(caminhoPai, caminhofilho, associacoes).toString();
+			System.out.println("*************NOVO ARQUIVO: " + caminho +"/" +item.getCasoDeTeste() );
+			
+			List<Associacao> associacoes = associacaoService.findByItem(item);
+			
+			resultado = Avalia.run(caminhoPai, caminhofilho, associacoes);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException
 				| SecurityException | IllegalArgumentException | InvocationTargetException | IOException e) {
 			// TODO Auto-generated catch block
@@ -167,18 +179,42 @@ public class ItemController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(message);
-		
-		return "redirect:/item/submissao/" + item.getIdItem();
+		System.out.println("Sua nota foi: " + resultado.getNota());
+		System.out.println("Mensagens: " + resultado.getMensagem());
+		session.setAttribute("resultado", resultado);
+		return "redirect:/item/resultado";
 	}
 		
-	
+	@RequestMapping(value = "/item/resultado")
+	public String resultado() {
+		
+
+		return "item/resultado";
+	}
+
 	
 	
 	@RequestMapping(value = "/item/remover/{idItem}", method = RequestMethod.GET)
 	public String remover(@PathVariable("idItem") int id) {
 		itemService.remover(id);
-		return "redirect:/item/listar";
+		return "redirect:/item/index_item";
 	}
 
+	
+	
+	public void copiar(String origem, String destino) throws IOException{
+		File src = new File(origem);
+		File dst = new File(destino);
+		InputStream in = new FileInputStream(src);
+        OutputStream out = new FileOutputStream(dst);           // Transferindo bytes de entrada para saída
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+	}
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.ufc.quixada.javaliproject.evaluationservice.Associacao;
 import br.ufc.quixada.javaliproject.model.Atividade;
 import br.ufc.quixada.javaliproject.model.Item;
 import br.ufc.quixada.javaliproject.repository.ItemRepository;
@@ -42,6 +43,12 @@ public class ItemServiceImpl implements ItemService {
 	public void remover(int id) {
 		Item item = itemRepository.findById(id);
 		itemRepository.remover(item);
+	}
+
+	@Override
+	public List<Associacao> findASSByItemId(int id) {
+		return itemRepository.findASSByItemId(id);
+		
 	}
 
 }

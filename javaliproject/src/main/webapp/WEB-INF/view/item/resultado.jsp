@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+ <html>
+ <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -12,9 +13,11 @@
 	<!-- Latest compiled and magnified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-	<title>Cadastro</title>
-</head>
-<body>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <title>RESULTADO</title>
+ </head>
+ <body>
+ <%Thread.sleep(2000);%>	
 <div id="wrap">
 		
 		<div class="login-container" align="center">
@@ -29,30 +32,38 @@
 			</div>
 		</div>
 
+ <div class="container" align="center">
+		<img src="../resources/img/boar.jpg" width="100" height="115">
+		<h2>RESULTADO:</h2>
+
+	<div class="progress">
+  		<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: ${resultado.nota * 10}%">
+  	 	</div>
+	</div> 
+    <h2>Sua nota é ${resultado.nota}</h2>
+	<c:set var="nota" scope="session" value="${resultado.nota}"/>
+						<c:if test="${nota==10}">
+		    				<label style="color: green">${resultado.mensagem}</label><br/>
+		    			</c:if>
+		    			<c:if test="${nota<10}">
+		    				<label style="color: red">${resultado.mensagem}</label><br/>
+		    			</c:if>
 	
+	<input type="button" value="Voltar" class="btn btn-primary" onclick="window.location.href='/javaliproject/aluno/indexA'"/>
 	
-	<form:form id="adicionarAlunoForm"  class="form-center" commandName="aluno" servletRelativeAction="/aluno/adicionar" method="POST">
-		
-		<div class="form-group">
-			<h2>Novo Aluno</h2><br>
-			<label for="name">Nome: </label><br>
-			<form:input id="name" type="text" path="nome" class="form-control" placeholder="Nome"/><br>    
-			<label>Username: </label><br>
-			<form:input type="text" path="username" class="form-control" placeholder="Username"/><br>
-			<label>Senha: </label><br>
-			<form:input type="password" path="senha" class="form-control" placeholder="Senha"/><br>
-			<label>Matricula: </label><br>
-			<form:input type="text" path="matricula" class="form-control" placeholder="Matrícula"/><br>
-		<input type="submit" value="Adicionar" class="btn btn-default"/>
-		</div>
-		
-	</form:form>
 	</div>
 	
-	<div id="footer">
+    
+
+ 
+ </div>
+
+<div id="footer">
       <div class="container">
         <p class="text-muted credit">Universidade Federal do Ceará - Campus Quixadá.</p>
       </div>
     </div>	
-</body>
-</html>
+
+
+ </body>
+ </html>
